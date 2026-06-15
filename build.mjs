@@ -38,6 +38,42 @@ const slugify = (s = "") =>
    .replace(/['']/g, "").replace(/[^a-z0-9]+/g, "-")
    .replace(/^-+|-+$/g, "").slice(0, 80) || "episode";
 
+const titleCase = (s = "") =>
+  s.toLowerCase().replace(/(^|[\s-])(\w)/g, (_, p, c) => p + c.toUpperCase());
+
+// Work out an episode's themes from (1) its itunes:keywords and
+// (2) the "Genres include: …" line the author writes in the notes.
+function deriveThemes(keywords = "", html = "", title = "") {
+  const found = new Map(); // lowercase key -> display value
+  const add = (raw) => {
+    const g = (raw || "").replace(/[.\s]+$/, "").replace(/^[.\s]+/, "").trim();
+    if (g.length > 1 && g.length <= 30 && !/^\d+$/.test(g)) {
+      const disp = titleCase(g);
+      found.set(disp.toLowerCase(), disp);
+    }
+  };
+  if (keywords) keywords.split(",").forEach(add);
+
+  // Split the notes into block-level segments so a label like
+  // "<b>Genres include:</b> Romance." stays on one line, then read
+  // the genre list out of any segment that mentions "genre".
+  const segments = html
+    .split(/<\/div>|<\/p>|<br\s*\/?>/i)
+    .map((s) => s.replace(/<[^>]+>/g, " ").replace(/&[a-z]+;/gi, " ").replace(/\s+/g, " ").trim());
+  for (const seg of segments) {
+    const m = seg.match(/genres?\b[^a-z0-9]*(?:are|include)?\s*[:.]*\s*(.+)/i);
+    if (m) {
+      m[1]
+        .split(/warnings?|music|no warning|there are no|rate us|enjoy/i)[0]
+        .split(/[,.;]|\band\b|\bor\b/i)
+        .forEach(add);
+    }
+  }
+  if (/cloever'?s journal|reviewing \d{4}/i.test(title)) add("Cloever's Journal");
+  if (/in memoriam|special episode/i.test(title)) add("Special");
+  return [...found.values()];
+}
+
 // Pull the first capture group of a tag from a chunk of XML.
 function tag(xml, name) {
   const re = new RegExp(`<${name}[^>]*>([\\s\\S]*?)</${name}>`, "i");
@@ -111,10 +147,7 @@ function parse(xml) {
     const epNum = tag(x, "itunes:episode");
     const image = attr(x, "itunes:image", "href") || channel.image;
     const keywords = tag(x, "itunes:keywords");
-    const genres = keywords
-      ? keywords.split(",").map((g) => g.trim()).filter(Boolean)
-          .map((g) => g.replace(/\b\w/g, (c) => c.toUpperCase()))
-      : [];
+    const genres = deriveThemes(keywords, descHtml, title);
     items.push({
       title, slug: slugify(title), descHtml,
       summary: summary.slice(0, 200) + (summary.length > 200 ? "…" : ""),
@@ -332,7 +365,8 @@ async function build() {
     ogImage: channel.image,
     body: `
     <h1 class="page-title">Playlists</h1>
-    <h2 class="sec-title">By genre</h2>
+    <p class="page-sub">Browse the fables by theme, or work through a whole season.</p>
+    <h2 class="sec-title">By theme</h2>
     <div class="pl-grid">
       ${genreNames.map((g) => `<a class="pl-tile" href="/playlists/${slugify(g)}/"><span>${escapeHtml(g)}</span><em>${byGenre[g].length}</em></a>`).join("") || "<p>No genre tags yet.</p>"}
     </div>
@@ -344,7 +378,7 @@ async function build() {
 
   for (const g of genreNames) {
     await writePage(`playlists/${slugify(g)}`, page({
-      title: `${g} — ${CONFIG.title} playlist`,
+      title: `${g} stories — ${CONFIG.title}`,
       desc: `${byGenre[g].length} ${g} stories from ${CONFIG.title}.`,
       canonical: `${CONFIG.siteUrl}/playlists/${slugify(g)}/`,
       ogImage: channel.image,
