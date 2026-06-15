@@ -1,0 +1,20 @@
+{
+  "_comment": "Editable site text. Episodes come from the RSS feed automatically — you don't edit those here. Long-form About copy lives in src/about.html. After editing, run `npm run build`.",
+
+  "title": "Tempered Fables",
+  "penName": "N.T. Cloever",
+  "tagline": "Fictional short stories that leave you with a lesson to remember.",
+  "kicker": "Wisteria Eventide · a fiction layer of Eterna",
+
+  "intro": "",
+
+  "siteUrl": "https://temperedfables.com",
+  "feedUrl": "https://feeds.buzzsprout.com/1374007.rss",
+
+  "links": {
+    "spotify": "https://open.spotify.com/show/0r2yPKmF4zbvY4nB8lJp7V",
+    "rss": "https://feeds.buzzsprout.com/1374007.rss",
+    "buzzsprout": "https://temperedfables.buzzsprout.com/",
+    "eterna": "https://eterna.garden"
+  }
+}

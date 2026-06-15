@@ -1,0 +1,236 @@
+/* ============================================================
+   Tempered Fables — Wisteria Eventide (Universe -1)
+   A fiction layer of the Eterna garden.
+   ------------------------------------------------------------
+   Palette + type taken directly from the Eterna Brand Design
+   Guide v1.0 (§3.1 Wisteria Eventide, §4). Dark-first.
+   ============================================================ */
+:root {
+  /* Backgrounds */
+  --bg:        #120e18;   /* Deep violet-black */
+  --bg-2:      #1a1324;   /* Dark plum */
+  --bg-3:      #241a32;   /* Muted aubergine */
+  --bg-hover:  #2e2240;   /* Lifted plum */
+
+  /* Text */
+  --text:      #d0c4df;   /* Soft lavender grey */
+  --muted:     #8a7da0;   /* Dusty lilac */
+  --heading:   #f0e6ff;   /* Near-white violet */
+  --title:     #e8b4f8;   /* Orchid pink */
+  --bold:      #ff6b8a;   /* Rose red */
+  --italic:    #f4a4c0;   /* Blush pink */
+
+  /* Links + accents */
+  --link:      #c49cff;   /* Soft violet (internal) */
+  --link-ext:  #a8d8b9;   /* Sage green (external) */
+  --link-hover:#f0c0ff;   /* Light orchid */
+  --accent:    #c49cff;   /* Wisteria purple */
+  --accent-2:  #e8b4f8;   /* Orchid */
+  --hi-bg:     #e8b4f8;   /* Orchid */
+  --hi-text:   #1a1324;   /* Dark plum */
+  --tag:       #d4a0e0;   /* Muted violet */
+
+  /* Quotes / lines */
+  --quote-bg:  #1a1324;
+  --quote-bd:  #a678c8;
+  --quote-tx:  #d4b8e8;
+  --line:      #2e2240;   /* Muted plum */
+  --line-strong:#7b5ea7;  /* Rich purple */
+
+  /* Type (Wisteria Eventide) */
+  --font-body: "Lora", Georgia, "Times New Roman", serif;
+  --font-head: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+
+  --maxw: 920px;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+::selection { background: #9b59b6; color: #fff; }
+
+body {
+  margin: 0; font-family: var(--font-body); color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(196,156,255,.16), transparent 60%),
+    radial-gradient(900px 500px at -10% 8%, rgba(36,26,50,.7), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  line-height: 1.8; font-size: 18px; letter-spacing: .01em;
+}
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+a[href^="http"]:not([href*="temperedfables.com"]):not([href*="eterna.garden"]) { color: var(--link-ext); }
+img { max-width: 100%; display: block; border-radius: 6px; }
+.has-player main, .has-player .site-foot { padding-bottom: 96px; }
+
+/* Header */
+.site-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; max-width: var(--maxw); margin: 0 auto; padding: 20px 22px;
+  flex-wrap: wrap;
+}
+.brand-mark {
+  font-family: var(--font-head); font-size: 26px; font-weight: 600;
+  color: var(--heading); letter-spacing: .02em;
+}
+.brand:hover { text-decoration: none; }
+.site-head nav { display: flex; gap: 22px; }
+.site-head nav a {
+  color: var(--muted); font-family: var(--font-head); font-size: 17px;
+  letter-spacing: .04em;
+}
+.site-head nav a:hover { color: var(--link-hover); text-decoration: none; }
+
+/* Hero */
+.hero {
+  display: grid; grid-template-columns: 220px 1fr; gap: 34px;
+  align-items: center; padding: 28px 0 40px;
+}
+.hero-art {
+  width: 220px; height: 220px; border-radius: 16px; object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2), 0 24px 60px rgba(0,0,0,.45), 0 0 0 1px var(--line);
+}
+.kicker {
+  font-family: var(--font-head); font-style: italic; font-size: 20px;
+  color: var(--accent); margin: 0 0 4px; letter-spacing: .02em;
+}
+.hero-text h1 {
+  font-family: var(--font-head); font-weight: 600; font-size: clamp(44px, 8vw, 72px);
+  line-height: 1.05; margin: 0 0 12px; color: var(--title); letter-spacing: .02em;
+}
+.lead { font-size: 21px; color: var(--heading); margin: 0 0 12px; font-style: italic; }
+.hero-cta { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block; padding: 11px 20px; border-radius: 999px;
+  background: var(--accent); color: var(--bg); font-weight: 600;
+  font-family: var(--font-head); font-size: 18px; border: 1px solid transparent;
+}
+.btn:hover { background: var(--accent-2); text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--accent); border-color: var(--line-strong); }
+.btn.ghost:hover { background: var(--bg-hover); color: var(--link-hover); }
+
+/* Section headers */
+.sec-title, .page-title {
+  font-family: var(--font-head); color: var(--heading); margin: 32px 0 18px;
+  letter-spacing: .02em; font-weight: 600;
+}
+.page-title { font-size: clamp(34px, 6vw, 52px); margin-top: 14px; color: var(--title); }
+.sec-title { font-size: 30px; }
+.page-sub { color: var(--muted); margin: -8px 0 18px; }
+.more { margin-top: 18px; }
+.back { display: inline-block; color: var(--muted); margin: 4px 0 12px; font-size: 15px; }
+
+/* Episode grid + cards */
+.ep-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 640px){ .ep-grid { grid-template-columns: 1fr 1fr; } }
+.ep-card {
+  display: flex; gap: 14px; padding: 14px; border: 1px solid var(--line);
+  background: var(--bg-2); border-radius: var(--radius);
+  transition: background .15s ease, transform .15s ease, border-color .15s ease;
+}
+.ep-card:hover { background: var(--bg-hover); border-color: var(--line-strong); transform: translateY(-2px); }
+.ep-art img { width: 92px; height: 92px; border-radius: 10px; object-fit: cover; }
+.ep-body { min-width: 0; flex: 1; }
+.ep-title { font-family: var(--font-head); font-size: 23px; line-height: 1.1; margin: 0 0 4px; }
+.ep-title a { color: var(--heading); }
+.ep-title a:hover { color: var(--link-hover); text-decoration: none; }
+.ep-meta { color: var(--muted); font-size: 13px; margin: 0 0 8px; font-family: var(--font-body); }
+.ep-sum { font-size: 15px; color: var(--text); margin: 0 0 10px; }
+.ep-genres { margin: 0 0 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-size: 12px; padding: 3px 11px; border-radius: 999px;
+  background: rgba(212,160,224,.14); color: var(--tag); border: 1px solid var(--line);
+  font-family: var(--font-body); letter-spacing: .02em;
+}
+.chip:hover { background: rgba(212,160,224,.28); color: var(--link-hover); text-decoration: none; }
+
+.play-btn {
+  font-family: var(--font-head); font-size: 17px; cursor: pointer;
+  padding: 8px 18px; border-radius: 999px; border: 1px solid var(--accent);
+  background: transparent; color: var(--accent);
+  transition: background .15s ease, color .15s ease;
+}
+.play-btn:hover { background: var(--accent); color: var(--bg); }
+.play-btn.big { font-size: 19px; padding: 11px 24px; margin-top: 6px; }
+
+/* Single episode */
+.ep-single-head { display: grid; grid-template-columns: 170px 1fr; gap: 26px; align-items: start; }
+.ep-single-art { width: 170px; height: 170px; border-radius: 14px; object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2), 0 16px 40px rgba(0,0,0,.4), 0 0 0 1px var(--line); }
+.ep-single h1 { font-family: var(--font-head); color: var(--title); margin: 0 0 8px;
+  font-size: clamp(32px,5vw,46px); line-height: 1.05; letter-spacing: .02em; }
+.ep-notes {
+  margin: 30px 0; padding: 26px; border-radius: var(--radius);
+  background: var(--bg-2); border: 1px solid var(--line); font-size: 18px;
+}
+.ep-notes div { margin: 0 0 10px; }
+.ep-notes b { color: var(--bold); }
+.ep-notes a { color: var(--link); word-break: break-word; }
+.ep-notes a[href^="http"] { color: var(--link-ext); }
+.ep-nav {
+  display: flex; justify-content: space-between; gap: 16px; margin-top: 24px;
+  border-top: 1px solid var(--line); padding-top: 16px; font-size: 15px;
+  font-family: var(--font-head);
+}
+
+/* Playlists */
+.pl-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); }
+.pl-tile {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px; border-radius: var(--radius); border: 1px solid var(--line);
+  background: var(--bg-2); color: var(--heading); font-family: var(--font-head); font-size: 22px;
+}
+.pl-tile:hover { background: var(--bg-hover); border-color: var(--line-strong); text-decoration: none; }
+.pl-tile em { font-style: normal; color: var(--accent); font-size: 15px; }
+
+/* Footer */
+.site-foot { max-width: var(--maxw); margin: 40px auto 0; padding: 28px 22px 48px;
+  border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; text-align: center; }
+.foot-eterna { font-style: italic; }
+
+/* About prose */
+.prose p { font-size: 19px; }
+.prose .lead { font-size: 23px; }
+.prose h2 { font-family: var(--font-head); color: var(--heading); font-size: 28px; margin-top: 30px; letter-spacing: .02em; }
+.prose strong { color: var(--bold); }
+.prose em { color: var(--italic); font-style: italic; }
+
+/* ---- Persistent player bar ---- */
+.player {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  display: flex; align-items: center; gap: 14px; padding: 10px 16px;
+  background: rgba(18,14,24,.88); backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line-strong); box-shadow: 0 -8px 30px rgba(0,0,0,.45);
+}
+.pl-art { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex: none; }
+.pl-mid { flex: 1; min-width: 0; }
+.pl-top { display: flex; align-items: center; gap: 10px; }
+.pl-btn {
+  background: none; border: none; color: var(--text); font-size: 18px; cursor: pointer;
+  padding: 2px 4px; line-height: 1;
+}
+.pl-btn:hover { color: var(--link-hover); }
+.pl-play { font-size: 22px; color: var(--accent); }
+.pl-title {
+  font-family: var(--font-head); font-size: 18px; color: var(--heading);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0;
+}
+.pl-rate {
+  background: none; border: 1px solid var(--line-strong); color: var(--muted);
+  border-radius: 999px; font-size: 12px; padding: 3px 9px; cursor: pointer; flex: none;
+  font-family: var(--font-body);
+}
+.pl-rate:hover { color: var(--link-hover); border-color: var(--accent); }
+.pl-bar { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.pl-time { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; flex: none; }
+.pl-seek { flex: 1; accent-color: var(--accent); height: 4px; }
+
+@media (max-width: 560px){
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .hero-art { margin: 0 auto; width: 190px; height: 190px; }
+  .hero-cta { justify-content: center; }
+  .ep-single-head { grid-template-columns: 1fr; }
+  .pl-title { display: none; }
+}

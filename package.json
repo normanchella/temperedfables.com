@@ -1,0 +1,12 @@
+{
+  "name": "temperedfables.com",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site for Tempered Fables, generated from the show's RSS feed. A Wisteria layer of Eterna.",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && node serve.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
